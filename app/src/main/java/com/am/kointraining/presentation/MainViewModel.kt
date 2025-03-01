@@ -7,6 +7,9 @@ class MainViewModel (
     private val repository: MainRepository
 ) : ViewModel() {
 
+    fun doNetworkCall () {
+        repository.doNetworkCall()
 
+    }
 
 }
