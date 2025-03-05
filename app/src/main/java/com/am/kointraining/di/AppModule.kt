@@ -1,10 +1,16 @@
 package com.am.kointraining.di
 
 import com.am.kointraining.data.MainRepositoryImpl
+import com.am.kointraining.data.api.KtorApi
 import com.am.kointraining.data.api.RemoteApi
 import com.am.kointraining.domain.Constants
 import com.am.kointraining.domain.MainRepository
 import com.am.kointraining.presentation.MainViewModel
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.http.ContentType
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -21,6 +27,24 @@ val appModule = module {
             .build()
             .create(RemoteApi::class.java)
     }
+
+    single {
+        HttpClient {
+            install(ContentNegotiation) {
+                json(json = Json {
+                    prettyPrint = true
+                    isLenient = true
+                    useAlternativeNames = true
+                    ignoreUnknownKeys = true
+                    encodeDefaults = false
+                },
+                    contentType = ContentType.Any
+                )
+            }
+        }
+    }
+
+    single<KtorApi>{KtorApi(get())}
 
 
     /**

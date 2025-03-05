@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -66,6 +67,11 @@ dependencies {
 
     implementation(libs.ktor.android)
     implementation(libs.ktor.client)
+    implementation(libs.ktor.negotiation)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.cio)
+
+    implementation(libs.kotlinx.serialization)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit2.converter.gson)
