@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import com.am.kointraining.data.api.RemoteApi
 import com.am.kointraining.data.entity.MockEntity
 import com.am.kointraining.presentation.MainViewModel
+import com.am.kointraining.presentation.ui.MainScreen
 import com.am.kointraining.presentation.ui.theme.KoinTrainingTheme
 import org.koin.android.ext.android.inject
 import org.koin.android.scope.AndroidScopeComponent
@@ -42,6 +43,10 @@ class MainActivity : ComponentActivity(), AndroidScopeComponent {
                 val viewModel = koinViewModel<MainViewModel>()
 
                 viewModel.doNetworkCall()
+
+                viewModel.doKtorCall()
+
+                MainScreen(viewModel)
 
             }
         }
